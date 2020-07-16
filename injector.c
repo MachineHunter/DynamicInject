@@ -42,13 +42,14 @@ void print_ok(char *str) {
 
 void print_help() {
 	printf("\nCommands:\n");
-	printf("--------------------------------------------------------------\n");
+	printf("------------------------------------------------------------------------\n");
 	printf("set: set PID and DLL\n");
 	printf("show: show current settings\n");
 	printf("inject: execute DLL injection\n");
 	printf("getpid: get PID of the given process\n");
+	printf("list: list available DLL payloads in DLLs/\n");
 	printf("exit: exit program\n");
-	printf("--------------------------------------------------------------\n\n");
+	printf("------------------------------------------------------------------------\n\n");
 }
 
 void get_pid() {
@@ -80,10 +81,16 @@ void set() {
 
 void show() {
 	printf("\nCurrent options:\n");
-	printf("--------------------------------------------------------------\n");
+	printf("------------------------------------------------------------------------\n");
 	printf("  target PID -> %d\n", g_pid);
 	printf("  DLL file path -> %s\n", g_path);
-	printf("--------------------------------------------------------------\n\n");
+	printf("------------------------------------------------------------------------\n\n");
+}
+
+void list() {
+	system("\nDLL payloads:\n");
+	system("cd DLLs & dir & cd ..");
+	printf("\n");
 }
 
 int check() {
@@ -162,6 +169,7 @@ void cmd_handler(char *cmd) {
 	else if(strcmp(cmd, "inject\n")==0) inject();
 	else if(strcmp(cmd, "exit\n")==0)   quit();
 	else if(strcmp(cmd, "getpid\n")==0) get_pid();
+	else if(strcmp(cmd, "list\n")==0)   list();
 	else if(strcmp(cmd, "\n")==0)       return;
 	else printf("command not found\n");
 }
